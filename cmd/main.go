@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/Doittikorn/cypernote/internal/infra/server"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -20,7 +21,8 @@ func main() {
 	e.Use(middleware.Recover())
 
 	// Routes
-	e.GET("/", hello)
+	s := server.New(e)
+	s.Start()
 
 	// Start server
 	go func() {
@@ -39,9 +41,4 @@ func main() {
 	if err := e.Shutdown(ctx); err != nil {
 		e.Logger.Fatal(err)
 	}
-}
-
-// Handler
-func hello(c echo.Context) error {
-	return c.String(200, "Hello, World!")
 }
