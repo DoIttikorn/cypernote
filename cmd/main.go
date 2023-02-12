@@ -2,17 +2,24 @@ package main
 
 import (
 	"context"
+	"database/sql"
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 
+	"github.com/Doittikorn/cypernote/internal/infra/config"
 	"github.com/Doittikorn/cypernote/internal/infra/server"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+
+	_ "github.com/lib/pq"
 )
 
 func main() {
+	cfg := config.New().All()
+
 	// Echo instance
 	e := echo.New()
 
@@ -20,13 +27,23 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
+	sql, err := sql.Open("postgres", cfg.DBConnection)
+	if err != nil {
+		e.Logger.Fatal(err)
+	}
+	// Ping database if err log and exit
+	if err := sql.Ping(); err != nil {
+		e.Logger.Fatal(err)
+	}
+	defer sql.Close()
+
 	// Routes
-	s := server.New(e)
+	s := server.New(e, sql)
 	s.Start()
 
 	// Start server
 	go func() {
-		if err := e.Start(":1323"); err != nil && err != http.ErrServerClosed {
+		if err := e.Start(fmt.Sprintf(":%d", cfg.Server.Port)); err != nil && err != http.ErrServerClosed {
 			e.Logger.Fatal("shutting down the server")
 		}
 	}()
