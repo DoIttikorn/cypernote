@@ -39,7 +39,7 @@ func main() {
 
 	// Routes
 	s := server.New(e, sql)
-	s.Start()
+	s.Route()
 
 	// Start server
 	go func() {
