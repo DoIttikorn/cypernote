@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"github.com/Doittikorn/cypernote/internal/finance"
 	"github.com/Doittikorn/cypernote/internal/finance/repository"
 )
 
@@ -10,7 +11,7 @@ type Usecase struct {
 
 type FinanceUsecase interface {
 	GetByUserID()
-	Save()
+	Save(model *finance.M) error
 	Update()
 }
 
@@ -23,7 +24,12 @@ func New(repository repository.Repository) FinanceUsecase {
 func (u *Usecase) GetByUserID() {
 }
 
-func (u *Usecase) Save() {
+func (u *Usecase) Save(model *finance.M) error {
+	err := u.Repository.Save(model)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (u *Usecase) Update() {

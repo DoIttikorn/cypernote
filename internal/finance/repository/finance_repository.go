@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/Doittikorn/cypernote/internal/finance"
+	"github.com/Doittikorn/cypernote/pkg/errorc"
 )
 
 type Config struct {
@@ -13,7 +14,7 @@ type Config struct {
 
 type Repository interface {
 	GetByUserID()
-	Save(context *finance.M)
+	Save(context *finance.M) error
 	Update()
 }
 
@@ -26,27 +27,23 @@ func New(db *sql.DB) Repository {
 func (c *Config) GetByUserID() {
 }
 
-func (c *Config) Save(m *finance.M) {
+func (c *Config) Save(m *finance.M) error {
 	// save to database postgres
-	query, err := c.db.Prepare(`
-	INSERT INTO finance (user_id, amount, note, type, description) 
-	VALUES ($1, $2, $3, $4, $5, $6)
-	RETURNING id
-	`)
+	query, err := c.db.Prepare(`INSERT INTO finance (user_id, amount, note, type, status) 
+	VALUES ($1, $2, $3, $4, $5)
+	RETURNING id`)
 	if err != nil {
 		log.Println(err)
+		return errorc.New("prepare query error")
 	}
 
-	execute, err := query.Query(m.UserID, m.Amount, m.Note, m.Type, m.CreatedAt)
+	err = query.QueryRow(m.UserID, m.Amount, m.Note, m.Type, m.Status).Scan(&m.ID)
 	if err != nil {
 		log.Println(err)
+		return errorc.New("query error")
 	}
 
-	// scan to struct
-	err = execute.Scan(&m.ID)
-	if err != nil {
-		log.Println(err)
-	}
+	return nil
 }
 
 func (c *Config) Update() {

@@ -5,16 +5,16 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type Handler struct {
+type FinanceHandler struct {
 	financeUsecase usecase.FinanceUsecase
 }
 
-type FinanceHandler interface {
-	Save()
+type FinanceHttp interface {
+	Save(c echo.Context) error
 }
 
 func NewHttp(e *echo.Group, financeUsecase usecase.FinanceUsecase) {
-	h := &Handler{
+	h := &FinanceHandler{
 		financeUsecase: financeUsecase,
 	}
 
