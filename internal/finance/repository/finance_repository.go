@@ -29,15 +29,16 @@ func (c *Config) GetByUserID() {
 
 func (c *Config) Save(m *finance.M) error {
 	// save to database postgres
-	query, err := c.db.Prepare(`INSERT INTO finance (user_id, amount, note, type, status) 
-	VALUES ($1, $2, $3, $4, $5)
-	RETURNING id`)
+	query, err := c.db.Prepare(`
+		INSERT INTO finance (user_id, amount, note, type, status, datetime_at, created_at) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7)
+		RETURNING id
+	`)
 	if err != nil {
 		log.Println(err)
 		return errorc.New("prepare query error")
 	}
-
-	err = query.QueryRow(m.UserID, m.Amount, m.Note, m.Type, m.Status).Scan(&m.ID)
+	err = query.QueryRow(m.UserID, m.Amount, m.Note, m.Type, m.Status, m.DateTimeAt, m.CreatedAt).Scan(&m.ID)
 	if err != nil {
 		log.Println(err)
 		return errorc.New("query error")
