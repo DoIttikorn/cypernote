@@ -6,6 +6,7 @@ import (
 	_financeHttp "github.com/Doittikorn/cypernote/internal/finance/controller/http"
 	_financeRepository "github.com/Doittikorn/cypernote/internal/finance/repository"
 	_financeUsecase "github.com/Doittikorn/cypernote/internal/finance/usecase"
+	_userRepository "github.com/Doittikorn/cypernote/internal/user/repository"
 	"github.com/labstack/echo/v4"
 )
 
@@ -23,16 +24,21 @@ func New(router *echo.Echo, database *sql.DB) *Server {
 
 func (s *Server) Route() {
 
-	v1 := s.echo.Group("/v1")
 	// Routes
+	v1 := s.echo.Group("/v1")
+
+	//* User group
+	// userGroup := v1.Group("/user")
+	userRepository := _userRepository.New(s.db)
 
 	//* Finance group
 	financeGroup := v1.Group("/finance")
 	financeRepository := _financeRepository.New(s.db)
-	financeUsecase := _financeUsecase.New(financeRepository)
+	financeUsecase := _financeUsecase.New(financeRepository, userRepository)
 	_financeHttp.NewHttp(financeGroup, financeUsecase)
 
-	v1.GET("/", hello)
+	// health check
+	v1.GET("", hello)
 
 }
 

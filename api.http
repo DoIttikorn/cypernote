@@ -10,3 +10,6 @@ Content-Type: application/json
     "note": "salary",
     "datetime_at": "2019-01-01 00:00:00"
 }
+
+###
+GET http://localhost:1323/v1/finance/user/1 HTTP/1.1

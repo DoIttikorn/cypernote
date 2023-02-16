@@ -6,17 +6,20 @@ import (
 )
 
 type FinanceHandler struct {
-	financeUsecase usecase.FinanceUsecase
+	financeUsecase usecase.U
 }
 
 type FinanceHttp interface {
 	Save(c echo.Context) error
 }
 
-func NewHttp(e *echo.Group, financeUsecase usecase.FinanceUsecase) {
+func NewHttp(e *echo.Group, financeUsecase usecase.U) {
 	h := &FinanceHandler{
 		financeUsecase: financeUsecase,
 	}
 
 	e.POST("/", h.Save)
+
+	userFinance := e.Group("/user/:id")
+	userFinance.GET("", h.GetByUserID)
 }
