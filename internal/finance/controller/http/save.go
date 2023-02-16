@@ -17,7 +17,9 @@ func (h *FinanceHandler) Save(c echo.Context) error {
 	}
 
 	m.Status = "Y"
-	m.CreatedAt = time.Now().Format("2006-01-02 15:04:05")
+	currentTime := time.Now()
+	m.CreatedAt = currentTime
+	m.UpdatedAt = currentTime
 
 	err = h.financeUsecase.Save(&m)
 	if err != nil {
