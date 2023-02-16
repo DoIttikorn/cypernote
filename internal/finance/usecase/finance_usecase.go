@@ -13,7 +13,7 @@ type Usecase struct {
 }
 
 type U interface {
-	GetByUserID(userID float64, types []string) ([]finance.M, error)
+	GetByUserID(userID float64, filter *finance.Filter) ([]finance.M, error)
 	Save(model *finance.M) error
 	Update()
 }
@@ -25,7 +25,7 @@ func New(financeRepo repository.R, userRepo userRepository.R) U {
 	}
 }
 
-func (u *Usecase) GetByUserID(userId float64, types []string) ([]finance.M, error) {
+func (u *Usecase) GetByUserID(userId float64, filter *finance.Filter) ([]finance.M, error) {
 	userId, err := u.UserRepository.GetByID(userId)
 	var finance = []finance.M{}
 	if err != nil {
@@ -35,7 +35,7 @@ func (u *Usecase) GetByUserID(userId float64, types []string) ([]finance.M, erro
 		return finance, errorc.New("user not found")
 	}
 
-	finance, err = u.FinanceRepository.GetByUserID(userId, types)
+	finance, err = u.FinanceRepository.GetByUserID(userId, filter.Type)
 	if err != nil {
 		return finance, err
 	}
