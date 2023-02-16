@@ -3,6 +3,7 @@ package http
 import (
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/Doittikorn/cypernote/pkg/errorc"
 	"github.com/labstack/echo/v4"
@@ -21,7 +22,7 @@ func (h *FinanceHandler) GetByUserID(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, errorc.NewErrorRes(http.StatusBadRequest, "pattern id is not correct"))
 	}
 
-	finance, err := h.financeUsecase.GetByUserID(userID)
+	finance, err := h.financeUsecase.GetByUserID(userID, strings.Split(c.QueryParam("type"), ","))
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, errorc.NewErrorRes(http.StatusInternalServerError, err.Error()))

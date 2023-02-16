@@ -13,3 +13,7 @@ type M struct {
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`
 }
+
+type Filter struct {
+	Type []string
+}

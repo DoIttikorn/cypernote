@@ -12,4 +12,17 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:1323/v1/finance/user/1 HTTP/1.1
+
+POST http://localhost:1323/v1/finance/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "amount": 1,
+    "type": "expense",
+    "note": "salary",
+    "datetime_at": "2023-02-13T09:08:57.829Z"
+}
+
+###
+GET http://localhost:1323/v1/finance/user/1?type=income,expense HTTP/1.1

@@ -3,29 +3,29 @@ package usecase
 import (
 	"github.com/Doittikorn/cypernote/internal/finance"
 	"github.com/Doittikorn/cypernote/internal/finance/repository"
-	UserRepository "github.com/Doittikorn/cypernote/internal/user/repository"
+	userRepository "github.com/Doittikorn/cypernote/internal/user/repository"
 	"github.com/Doittikorn/cypernote/pkg/errorc"
 )
 
 type Usecase struct {
 	FinanceRepository repository.R
-	UserRepository    UserRepository.R
+	UserRepository    userRepository.R
 }
 
 type U interface {
-	GetByUserID(userID float64) ([]finance.M, error)
+	GetByUserID(userID float64, types []string) ([]finance.M, error)
 	Save(model *finance.M) error
 	Update()
 }
 
-func New(financeRepo repository.R, userRepo UserRepository.R) U {
+func New(financeRepo repository.R, userRepo userRepository.R) U {
 	return &Usecase{
 		FinanceRepository: financeRepo,
 		UserRepository:    userRepo,
 	}
 }
 
-func (u *Usecase) GetByUserID(userId float64) ([]finance.M, error) {
+func (u *Usecase) GetByUserID(userId float64, types []string) ([]finance.M, error) {
 	userId, err := u.UserRepository.GetByID(userId)
 	var finance = []finance.M{}
 	if err != nil {
@@ -35,7 +35,7 @@ func (u *Usecase) GetByUserID(userId float64) ([]finance.M, error) {
 		return finance, errorc.New("user not found")
 	}
 
-	finance, err = u.FinanceRepository.GetByUserID(userId)
+	finance, err = u.FinanceRepository.GetByUserID(userId, types)
 	if err != nil {
 		return finance, err
 	}

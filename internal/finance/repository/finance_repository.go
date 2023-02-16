@@ -6,14 +6,17 @@ import (
 
 	"github.com/Doittikorn/cypernote/internal/finance"
 	"github.com/Doittikorn/cypernote/pkg/errorc"
+	"github.com/lib/pq"
 )
+
+const ()
 
 type Config struct {
 	db *sql.DB
 }
 
 type R interface {
-	GetByUserID(userId float64) ([]finance.M, error)
+	GetByUserID(userId float64, types []string) ([]finance.M, error)
 	Save(context *finance.M) error
 	Update()
 }
@@ -24,18 +27,22 @@ func New(db *sql.DB) R {
 	}
 }
 
-func (c *Config) GetByUserID(userId float64) ([]finance.M, error) {
+func (c *Config) GetByUserID(userId float64, types []string) ([]finance.M, error) {
 	var finances []finance.M
+	if len(types) == 0 {
+		types = []string{"income", "expense"}
+	}
+
 	query, err := c.db.Prepare(`
 		SELECT id, user_id, amount, note, type, status, datetime_at, created_at, updated_at
 		FROM finance
-		WHERE user_id = $1
+		WHERE user_id = $1 AND type = ANY ($2)
 	`)
 	if err != nil {
 		log.Println(err)
 		return finances, errorc.New("prepare query error")
 	}
-	rows, err := query.Query(userId)
+	rows, err := query.Query(userId, pq.Array(types))
 	if err != nil {
 		log.Println(err)
 		return finances, errorc.New("query error")
