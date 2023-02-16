@@ -26,7 +26,7 @@ func New(financeRepo repository.R, userRepo UserRepository.R) U {
 }
 
 func (u *Usecase) GetByUserID(userId float64) ([]finance.M, error) {
-	userId, err := u.UserRepository.GetByUserID(userId)
+	userId, err := u.UserRepository.GetByID(userId)
 	var finance = []finance.M{}
 	if err != nil {
 		return finance, err

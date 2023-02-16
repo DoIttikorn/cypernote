@@ -29,8 +29,4 @@ func (h *FinanceHandler) GetByUserID(c echo.Context) error {
 
 	c.JSON(http.StatusOK, finance)
 	return nil
-	// if err != nil {
-	// 	return c.JSON(errorc.NewErrorRes(http.StatusInternalServerError, err.Error()))
-	// }
-	// return c.JSON(http.StatusOK, finance)
 }
