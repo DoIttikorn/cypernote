@@ -32,9 +32,9 @@ func main() {
 		e.Logger.Fatal(err)
 	}
 	// Ping database if err log and exit
-	if err := sql.Ping(); err != nil {
-		e.Logger.Fatal(err)
-	}
+	// if err := sql.Ping(); err != nil {
+	// 	e.Logger.Fatal(err)
+	// }
 	defer sql.Close()
 
 	// Routes
