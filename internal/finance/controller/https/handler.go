@@ -1,4 +1,4 @@
-package http
+package https
 
 import (
 	"github.com/Doittikorn/cypernote/internal/finance"
