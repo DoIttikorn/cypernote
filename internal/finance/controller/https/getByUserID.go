@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (h *FinanceHandler) GetFinanceByUserID(c echo.Context) error {
+func (h *FinanceHandler) GetByUserID(c echo.Context) error {
 	id := c.Param("id")
 	var filter = new(finance.Filter)
 
