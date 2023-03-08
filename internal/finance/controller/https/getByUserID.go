@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (h *FinanceHandler) GetByUserID(c echo.Context) error {
+func (handler *FinanceHandler) getByUserID(c echo.Context) error {
 	id := c.Param("id")
 	var filter = new(finance.Filter)
 
@@ -27,7 +27,7 @@ func (h *FinanceHandler) GetByUserID(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, errorc.ErrInvalidID)
 	}
 
-	finance, err := h.financeUsecase.GetByUserID(userID, filter)
+	finance, err := handler.usecase.GetByUserID(userID, filter)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, errorc.ErrServerMessage(err.Error()))

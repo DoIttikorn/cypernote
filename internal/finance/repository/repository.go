@@ -19,6 +19,8 @@ func New(db *sql.DB) finance.R {
 		db: db,
 	}
 }
+func (c *Config) Delete() {
+}
 
 func (c *Config) Update() {
 }

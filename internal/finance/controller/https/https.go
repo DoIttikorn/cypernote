@@ -6,18 +6,22 @@ import (
 )
 
 type FinanceHandler struct {
-	financeUsecase finance.U
-	filter         finance.Filter
+	usecase finance.U
+	filter  finance.Filter
 }
 
 func NewHttp(e *echo.Group, usecase finance.U) {
 	h := &FinanceHandler{
-		financeUsecase: usecase,
-		filter:         finance.Filter{},
+		usecase: usecase,
+		filter:  finance.Filter{},
 	}
 
-	e.POST("/", h.Save)
+	e.POST("/", h.save)
+	e.POST("/", h.delete)
+	// e.POST("/", h.Update)
 
+	// user group for finance
 	userFinance := e.Group("/user/:id")
-	userFinance.GET("", h.GetByUserID)
+
+	userFinance.GET("", h.getByUserID)
 }

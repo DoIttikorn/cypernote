@@ -2,10 +2,12 @@ package finance
 
 import (
 	"time"
+
+	"github.com/labstack/echo/v4"
 )
 
 type (
-	// model for finance
+	// model for finance for database
 	M struct {
 		ID         float64   `json:"id"`
 		UserID     int64     `json:"user_id"`
@@ -27,6 +29,7 @@ type (
 		GetByUserID(userId float64, types []string) ([]M, error)
 		Save(context *M) error
 		Update()
+		Delete()
 	}
 
 	// usecase interface for finance
@@ -34,5 +37,12 @@ type (
 		GetByUserID(userID float64, filter *Filter) ([]M, error)
 		Save(model *M) error
 		Update()
+		Delete()
+	}
+
+	H interface {
+		getByUserID(c echo.Context) error
+		save(c echo.Context) error
+		delete(e echo.Context) error
 	}
 )

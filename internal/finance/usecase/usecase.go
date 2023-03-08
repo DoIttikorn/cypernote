@@ -21,3 +21,7 @@ func New(financeRepo finance.R, userRepo user.R) finance.U {
 
 func (u *Usecase) Update() {
 }
+
+func (u *Usecase) Delete() {
+
+}
