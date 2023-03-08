@@ -3,7 +3,7 @@ package server
 import (
 	"database/sql"
 
-	_financeHttp "github.com/Doittikorn/cypernote/internal/finance/controller/http"
+	_financeHttp "github.com/Doittikorn/cypernote/internal/finance/controller/https"
 	_financeRepository "github.com/Doittikorn/cypernote/internal/finance/repository"
 	_financeUsecase "github.com/Doittikorn/cypernote/internal/finance/usecase"
 	_userRepository "github.com/Doittikorn/cypernote/internal/user/repository"

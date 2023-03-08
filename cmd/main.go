@@ -9,8 +9,8 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/Doittikorn/cypernote/internal/infra/config"
-	"github.com/Doittikorn/cypernote/internal/infra/server"
+	"github.com/Doittikorn/cypernote/internal/infrastructure/config"
+	"github.com/Doittikorn/cypernote/internal/infrastructure/server"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
