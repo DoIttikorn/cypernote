@@ -10,9 +10,9 @@ type FinanceHandler struct {
 	filter         finance.Filter
 }
 
-func NewHttp(e *echo.Group, financeUsecase finance.U) {
+func NewHttp(e *echo.Group, usecase finance.U) {
 	h := &FinanceHandler{
-		financeUsecase: financeUsecase,
+		financeUsecase: usecase,
 		filter:         finance.Filter{},
 	}
 
