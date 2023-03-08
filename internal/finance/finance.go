@@ -3,6 +3,7 @@ package finance
 import "time"
 
 type (
+	// model for finance
 	M struct {
 		ID         float64   `json:"id"`
 		UserID     int64     `json:"user_id"`
@@ -14,7 +15,7 @@ type (
 		CreatedAt  time.Time `json:"created_at"`
 		UpdatedAt  time.Time `json:"updated_at"`
 	}
-
+	// filter for finance
 	Filter struct {
 		Type []string `json:"type"`
 	}

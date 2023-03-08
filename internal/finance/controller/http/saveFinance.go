@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (h *FinanceHandler) Save(c echo.Context) error {
+func (h *FinanceHandler) SaveFinance(c echo.Context) error {
 	var m finance.M
 	err := c.Bind(&m)
 	if err != nil {

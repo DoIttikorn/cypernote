@@ -17,8 +17,8 @@ func NewHttp(e *echo.Group, financeUsecase usecase.U) {
 		filter:         finance.Filter{},
 	}
 
-	e.POST("/", h.Save)
+	e.POST("/", h.SaveFinance)
 
 	userFinance := e.Group("/user/:id")
-	userFinance.GET("", h.GetByUserID)
+	userFinance.GET("", h.GetFinanceByUserID)
 }

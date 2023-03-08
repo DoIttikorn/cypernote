@@ -64,7 +64,6 @@ func (c *Config) GetByUserID(userId float64, types []string) ([]finance.M, error
 }
 
 func (c *Config) Save(m *finance.M) error {
-	// save to database postgres
 	query, err := c.db.Prepare(`
 		INSERT INTO finance (user_id, amount, note, type, status, datetime_at, created_at, updated_at) 
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
