@@ -13,7 +13,7 @@ func (h *FinanceHandler) Save(c echo.Context) error {
 	var m finance.M
 	err := c.Bind(&m)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, errorc.NewErrorRes(http.StatusBadRequest, "Bad Request"))
+		return c.JSON(http.StatusBadRequest, errorc.ErrBind)
 	}
 
 	m.Status = "Y"
@@ -23,7 +23,7 @@ func (h *FinanceHandler) Save(c echo.Context) error {
 
 	err = h.financeUsecase.Save(&m)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, errorc.NewErrorRes(http.StatusInternalServerError, err.Error()))
+		return c.JSON(http.StatusInternalServerError, errorc.ErrServerMessage(err.Error()))
 	}
 	return c.JSON(http.StatusCreated, m)
 }

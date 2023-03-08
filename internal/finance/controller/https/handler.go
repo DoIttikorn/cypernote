@@ -2,16 +2,15 @@ package https
 
 import (
 	"github.com/Doittikorn/cypernote/internal/finance"
-	"github.com/Doittikorn/cypernote/internal/finance/usecase"
 	"github.com/labstack/echo/v4"
 )
 
 type FinanceHandler struct {
-	financeUsecase usecase.U
+	financeUsecase finance.U
 	filter         finance.Filter
 }
 
-func NewHttp(e *echo.Group, financeUsecase usecase.U) {
+func NewHttp(e *echo.Group, financeUsecase finance.U) {
 	h := &FinanceHandler{
 		financeUsecase: financeUsecase,
 		filter:         finance.Filter{},

@@ -12,7 +12,7 @@ func (u *Usecase) GetByUserID(userId float64, filter *finance.Filter) ([]finance
 		return finance, err
 	}
 	if userId == 0 {
-		return finance, errorc.New("user not found")
+		return finance, errorc.ErrBind
 	}
 
 	finance, err = u.FinanceRepository.GetByUserID(userId, filter.Type)

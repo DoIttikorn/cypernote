@@ -1,6 +1,8 @@
 package finance
 
-import "time"
+import (
+	"time"
+)
 
 type (
 	// model for finance
@@ -18,5 +20,19 @@ type (
 	// filter for finance
 	Filter struct {
 		Type []string `json:"type"`
+	}
+
+	// repository interface for finance
+	R interface {
+		GetByUserID(userId float64, types []string) ([]M, error)
+		Save(context *M) error
+		Update()
+	}
+
+	// usecase interface for finance
+	U interface {
+		GetByUserID(userID float64, filter *Filter) ([]M, error)
+		Save(model *M) error
+		Update()
 	}
 )

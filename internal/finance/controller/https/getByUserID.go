@@ -18,19 +18,19 @@ func (h *FinanceHandler) GetByUserID(c echo.Context) error {
 	}
 
 	if id == "" {
-		return c.JSON(http.StatusBadRequest, errorc.NewErrorRes(http.StatusBadRequest, "not get id"))
+		return c.JSON(http.StatusBadRequest, errorc.ErrNotFound)
 	}
 
 	userID, err := strconv.ParseFloat(id, 64)
 
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, errorc.NewErrorRes(http.StatusBadRequest, "pattern id is not correct"))
+		return c.JSON(http.StatusBadRequest, errorc.ErrInvalidID)
 	}
 
 	finance, err := h.financeUsecase.GetByUserID(userID, filter)
 
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, errorc.NewErrorRes(http.StatusInternalServerError, err.Error()))
+		return c.JSON(http.StatusInternalServerError, errorc.ErrServerMessage(err.Error()))
 	}
 
 	c.JSON(http.StatusOK, finance)

@@ -2,8 +2,7 @@ package repository
 
 import (
 	"database/sql"
-
-	"github.com/Doittikorn/cypernote/pkg/errorc"
+	"errors"
 )
 
 type Config struct {
@@ -32,7 +31,7 @@ func (c *Config) GetByID(id float64) (float64, error) {
 	var userID float64
 	err = stmt.QueryRow(id).Scan(&userID)
 	if err != nil {
-		return 0, errorc.New("user not found")
+		return 0, errors.New("user not found")
 	}
 
 	return userID, nil

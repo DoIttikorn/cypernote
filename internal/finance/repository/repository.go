@@ -2,10 +2,10 @@ package repository
 
 import (
 	"database/sql"
+	"errors"
 	"log"
 
 	"github.com/Doittikorn/cypernote/internal/finance"
-	"github.com/Doittikorn/cypernote/pkg/errorc"
 	"github.com/lib/pq"
 )
 
@@ -15,13 +15,7 @@ type Config struct {
 	db *sql.DB
 }
 
-type R interface {
-	GetByUserID(userId float64, types []string) ([]finance.M, error)
-	Save(context *finance.M) error
-	Update()
-}
-
-func New(db *sql.DB) R {
+func New(db *sql.DB) finance.R {
 	return &Config{
 		db: db,
 	}
@@ -40,12 +34,12 @@ func (c *Config) GetByUserID(userId float64, types []string) ([]finance.M, error
 	`)
 	if err != nil {
 		log.Println(err)
-		return finances, errorc.New("prepare query error")
+		return finances, errors.New("prepare query error")
 	}
 	rows, err := query.Query(userId, pq.Array(types))
 	if err != nil {
 		log.Println(err)
-		return finances, errorc.New("query error")
+		return finances, errors.New("query error")
 	}
 
 	defer rows.Close()
@@ -55,7 +49,7 @@ func (c *Config) GetByUserID(userId float64, types []string) ([]finance.M, error
 		err = rows.Scan(&finance.ID, &finance.UserID, &finance.Amount, &finance.Note, &finance.Type, &finance.Status, &finance.DateTimeAt, &finance.CreatedAt, &finance.UpdatedAt)
 		if err != nil {
 			log.Println(err)
-			return finances, errorc.New("scan error")
+			return finances, errors.New("scan error")
 		}
 		finances = append(finances, finance)
 	}
@@ -71,12 +65,12 @@ func (c *Config) Save(m *finance.M) error {
 	`)
 	if err != nil {
 		log.Println(err)
-		return errorc.New("prepare query error")
+		return errors.New("prepare query error")
 	}
 	err = query.QueryRow(m.UserID, m.Amount, m.Note, m.Type, m.Status, m.DateTimeAt, m.CreatedAt, m.UpdatedAt).Scan(&m.ID)
 	if err != nil {
 		log.Println(err)
-		return errorc.New("query error")
+		return errors.New("query error")
 	}
 
 	return nil
