@@ -1,9 +1,8 @@
 package repository
 
 import (
-	"errors"
-
 	"github.com/Doittikorn/cypernote/internal/user"
+	"github.com/Doittikorn/cypernote/pkg/errorc"
 )
 
 func (c *Config) AuditUserByID(userId user.UserID) error {
@@ -19,7 +18,7 @@ func (c *Config) AuditUserByID(userId user.UserID) error {
 	var userID float64
 	err = stmt.QueryRow(userId).Scan(&userID)
 	if err != nil {
-		return errors.New("user not found")
+		return errorc.ErrNotFound
 	}
 
 	return nil

@@ -23,7 +23,7 @@ func (h *FinanceHandler) save(c echo.Context) error {
 
 	err = h.usecase.Save(&m)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, errorc.ErrServerMessage(err.Error()))
+		return c.JSON(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
 	}
 	return c.JSON(http.StatusCreated, m)
 }

@@ -18,7 +18,7 @@ func NewHttp(e *echo.Group, usecase finance.U) {
 	}
 
 	e.POST("/", h.save)
-	e.POST("/", h.delete)
+	e.DELETE("/", h.delete)
 	// e.POST("/", h.Update)
 
 	// user group for finance

@@ -27,6 +27,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
+	// Database
 	sql, err := sql.Open("postgres", cfg.DBConnection)
 	if err != nil {
 		e.Logger.Fatal(err)

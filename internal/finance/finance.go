@@ -9,7 +9,7 @@ import (
 type (
 	// model for finance for database
 	M struct {
-		ID         float64   `json:"id"`
+		ID         int64     `json:"id"`
 		UserID     int64     `json:"user_id"`
 		Amount     float32   `json:"amount"`
 		Note       string    `json:"note"`
@@ -26,7 +26,7 @@ type (
 
 	// repository interface for finance
 	R interface {
-		GetByUserID(userId float64, types []string) ([]M, error)
+		GetByUserID(userId int64, types []string) ([]M, error)
 		Save(model *M) error
 		Update()
 		Delete()
@@ -34,7 +34,7 @@ type (
 
 	// usecase interface for finance
 	U interface {
-		GetByUserID(userID float64, filter *Filter) ([]M, error)
+		GetByUserID(userID int64, filter *Filter) ([]M, error)
 		Save(model *M) error
 		Update()
 		Delete()

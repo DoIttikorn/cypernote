@@ -2,6 +2,7 @@ package server
 
 import (
 	"database/sql"
+	"net/http"
 
 	_financeHttp "github.com/Doittikorn/cypernote/internal/finance/controller/https"
 	_financeRepository "github.com/Doittikorn/cypernote/internal/finance/repository"
@@ -44,10 +45,10 @@ func (s *Server) Route() {
 	// tagRepository := _tag.New(s.db)
 
 	// health check
-	v1.GET("", hello)
+	v1.GET("/", hello)
 
 }
 
 func hello(c echo.Context) error {
-	return c.String(200, "Hello, World!")
+	return c.JSON(http.StatusOK, "Hello, World!")
 }

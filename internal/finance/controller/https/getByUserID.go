@@ -18,10 +18,10 @@ func (h *FinanceHandler) getByUserID(c echo.Context) error {
 	}
 
 	if id == "" {
-		return c.JSON(http.StatusBadRequest, errorc.ErrNotFound)
+		return c.JSON(http.StatusNotFound, errorc.ErrNotFound)
 	}
 
-	userID, err := strconv.ParseFloat(id, 64)
+	userID, err := strconv.ParseInt(id, 10, 64)
 
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, errorc.ErrInvalidID)
@@ -29,7 +29,7 @@ func (h *FinanceHandler) getByUserID(c echo.Context) error {
 	finance, err := h.usecase.GetByUserID(userID, filter)
 
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, errorc.ErrServerMessage(err.Error()))
+		return c.JSON(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
 	}
 
 	c.JSON(http.StatusOK, finance)

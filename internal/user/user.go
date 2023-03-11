@@ -7,7 +7,7 @@ import (
 type (
 	// User is a struct that represents a user
 	M struct {
-		ID        float64   `json:"id"`
+		ID        int64     `json:"id"`
 		FirstName string    `json:"first_name"`
 		LastName  string    `json:"last_name"`
 		Age       int       `json:"age"`
@@ -15,7 +15,7 @@ type (
 		CreatedAt time.Time `json:"created_at"`
 	}
 	// ID is a type that represents a user id
-	UserID = float64
+	UserID = int64
 
 	// UserRepository is a repository interface for user
 	R interface {

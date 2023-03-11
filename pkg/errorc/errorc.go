@@ -3,19 +3,19 @@ package errorc
 import "net/http"
 
 type Error struct {
-	Code    int    `json:"code"`
+	Status  int    `json:"status"`
 	Message string `json:"message"`
 }
 
 func New(code int, message string) error {
 	return &Error{
-		Code:    code,
+		Status:  code,
 		Message: message,
 	}
 }
-func ErrServerMessage(message string) error {
+func ResponseErr(message string) error {
 	return &Error{
-		Code:    http.StatusInternalServerError,
+		Status:  http.StatusInternalServerError,
 		Message: message,
 	}
 }
