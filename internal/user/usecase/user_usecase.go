@@ -5,20 +5,16 @@ import (
 )
 
 type Usecase struct {
-	Repository user.R
+	repository user.R
 }
 
-type U interface {
-	GetByUserID() (float64, error)
-}
-
-func New(repository user.R) U {
+func New(repository user.R) user.U {
 	return &Usecase{
-		Repository: repository,
+		repository: repository,
 	}
 }
 
-func (u *Usecase) GetByUserID() (float64, error) {
+func (u *Usecase) GetByUserID(id user.UserID) (user.M, error) {
 	// var t string
 	// userID, err := u.Repository.GetByUserID(t)
 
@@ -26,5 +22,5 @@ func (u *Usecase) GetByUserID() (float64, error) {
 	// 	return 0, err
 	// }
 
-	return 0, nil
+	return user.M{}, nil
 }

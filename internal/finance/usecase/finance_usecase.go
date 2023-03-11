@@ -6,16 +6,16 @@ import (
 )
 
 type usecase struct {
-	FinanceRepository finance.R
-	UserRepository    user.R
+	financeRepository finance.R
+	userUsecase       user.U
 }
 
 // initialize usecase for finance when call New Usecase can use
 // finance repository and user repository
-func New(financeRepo finance.R, userRepo user.R) finance.U {
+func New(financeRepo finance.R, userRepo user.U) finance.U {
 	return &usecase{
-		FinanceRepository: financeRepo,
-		UserRepository:    userRepo,
+		financeRepository: financeRepo,
+		userUsecase:       userRepo,
 	}
 }
 

@@ -25,6 +25,7 @@ type (
 
 	// UserUsecase is a usecase interface for user
 	U interface {
-		GetByID(model *M) (M, error)
+		GetByUserID(id UserID) (M, error)
+		AuditUserByID(id UserID) error
 	}
 )

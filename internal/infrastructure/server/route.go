@@ -7,6 +7,7 @@ import (
 	_financeRepository "github.com/Doittikorn/cypernote/internal/finance/repository"
 	_financeUsecase "github.com/Doittikorn/cypernote/internal/finance/usecase"
 	_userRepository "github.com/Doittikorn/cypernote/internal/user/repository"
+	_userUsecase "github.com/Doittikorn/cypernote/internal/user/usecase"
 	"github.com/labstack/echo/v4"
 )
 
@@ -30,11 +31,12 @@ func (s *Server) Route() {
 	//* User group
 	// userGroup := v1.Group("/user")
 	userRepository := _userRepository.New(s.db)
+	userUsecase := _userUsecase.New(userRepository)
 
 	//* Finance group
 	financeGroup := v1.Group("/finance")
 	financeRepository := _financeRepository.New(s.db)
-	financeUsecase := _financeUsecase.New(financeRepository, userRepository)
+	financeUsecase := _financeUsecase.New(financeRepository, userUsecase)
 	_financeHttp.NewHttp(financeGroup, financeUsecase)
 
 	// Tag group
