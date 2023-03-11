@@ -5,7 +5,7 @@ import (
 	"github.com/Doittikorn/cypernote/pkg/errorc"
 )
 
-func (u *Usecase) GetByUserID(userId float64, filter *finance.Filter) ([]finance.M, error) {
+func (u *usecase) GetByUserID(userId float64, filter *finance.Filter) ([]finance.M, error) {
 	userId, err := u.UserRepository.GetByID(userId)
 	var finance = []finance.M{}
 	if err != nil {

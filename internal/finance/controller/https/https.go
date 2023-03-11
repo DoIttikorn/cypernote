@@ -11,6 +11,7 @@ type FinanceHandler struct {
 }
 
 func NewHttp(e *echo.Group, usecase finance.U) {
+
 	h := &FinanceHandler{
 		usecase: usecase,
 		filter:  finance.Filter{},

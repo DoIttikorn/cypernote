@@ -5,7 +5,7 @@ import (
 	"github.com/Doittikorn/cypernote/internal/user"
 )
 
-type Usecase struct {
+type usecase struct {
 	FinanceRepository finance.R
 	UserRepository    user.R
 }
@@ -13,15 +13,15 @@ type Usecase struct {
 // initialize usecase for finance when call New Usecase can use
 // finance repository and user repository
 func New(financeRepo finance.R, userRepo user.R) finance.U {
-	return &Usecase{
+	return &usecase{
 		FinanceRepository: financeRepo,
 		UserRepository:    userRepo,
 	}
 }
 
-func (u *Usecase) Update() {
+func (u *usecase) Update() {
 }
 
-func (u *Usecase) Delete() {
+func (u *usecase) Delete() {
 
 }

@@ -40,6 +40,7 @@ type (
 		Delete()
 	}
 
+	// handler https interface for finance
 	H interface {
 		getByUserID(c echo.Context) error
 		save(c echo.Context) error

@@ -2,7 +2,7 @@ package usecase
 
 import "github.com/Doittikorn/cypernote/internal/finance"
 
-func (u *Usecase) Save(model *finance.M) error {
+func (u *usecase) Save(model *finance.M) error {
 
 	err := u.FinanceRepository.Save(model)
 	if err != nil {
