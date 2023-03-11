@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (handler *FinanceHandler) save(c echo.Context) error {
+func (h *FinanceHandler) save(c echo.Context) error {
 	var m finance.M
 	err := c.Bind(&m)
 	if err != nil {
@@ -21,7 +21,7 @@ func (handler *FinanceHandler) save(c echo.Context) error {
 	m.CreatedAt = currentTime
 	m.UpdatedAt = currentTime
 
-	err = handler.usecase.Save(&m)
+	err = h.usecase.Save(&m)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, errorc.ErrServerMessage(err.Error()))
 	}

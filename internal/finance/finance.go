@@ -27,7 +27,7 @@ type (
 	// repository interface for finance
 	R interface {
 		GetByUserID(userId float64, types []string) ([]M, error)
-		Save(context *M) error
+		Save(model *M) error
 		Update()
 		Delete()
 	}
@@ -42,8 +42,8 @@ type (
 
 	// handler https interface for finance
 	H interface {
-		getByUserID(c echo.Context) error
-		save(c echo.Context) error
+		getByUserID(echo.Context) error
 		delete(e echo.Context) error
+		save(c echo.Context) error
 	}
 )

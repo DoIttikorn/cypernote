@@ -25,4 +25,5 @@ func NewHttp(e *echo.Group, usecase finance.U) {
 	userFinance := e.Group("/user/:id")
 
 	userFinance.GET("", h.getByUserID)
+
 }

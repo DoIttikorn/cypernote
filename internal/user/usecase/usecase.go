@@ -1,16 +1,18 @@
 package usecase
 
-import "github.com/Doittikorn/cypernote/internal/user/repository"
+import (
+	"github.com/Doittikorn/cypernote/internal/user"
+)
 
 type Usecase struct {
-	Repository repository.R
+	Repository user.R
 }
 
 type U interface {
 	GetByUserID() (float64, error)
 }
 
-func New(repository repository.R) U {
+func New(repository user.R) U {
 	return &Usecase{
 		Repository: repository,
 	}

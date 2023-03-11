@@ -14,14 +14,17 @@ type (
 		UpdatedAt time.Time `json:"updated_at"`
 		CreatedAt time.Time `json:"created_at"`
 	}
+	// ID is a type that represents a user id
+	UserID = float64
 
 	// UserRepository is a repository interface for user
 	R interface {
-		GetByID(id float64) (float64, error)
+		AuditUserByID(model UserID) error
+		GetByID(model *M) (M, error)
 	}
 
 	// UserUsecase is a usecase interface for user
 	U interface {
-		GetByID(id float64) (float64, error)
+		GetByID(model *M) (M, error)
 	}
 )

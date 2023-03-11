@@ -37,6 +37,10 @@ func (s *Server) Route() {
 	financeUsecase := _financeUsecase.New(financeRepository, userRepository)
 	_financeHttp.NewHttp(financeGroup, financeUsecase)
 
+	// Tag group
+	// tagGroup := v1.Group("/tag")
+	// tagRepository := _tag.New(s.db)
+
 	// health check
 	v1.GET("", hello)
 
