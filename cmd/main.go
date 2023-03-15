@@ -11,30 +11,35 @@ import (
 
 	"github.com/Doittikorn/cypernote/internal/infrastructure/config"
 	"github.com/Doittikorn/cypernote/internal/infrastructure/server"
+	"github.com/Doittikorn/cypernote/pkg/mlog"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"go.uber.org/zap"
 
 	_ "github.com/lib/pq"
 )
 
 func main() {
 	cfg := config.New().All()
-
+	logger, err := zap.NewProduction()
+	if err != nil {
+		logger.Fatal(err.Error())
+	}
 	// Echo instance
 	e := echo.New()
 
 	// Middleware
-	e.Use(middleware.Logger())
+	e.Use(mlog.Middleware(logger))
 	e.Use(middleware.Recover())
 
 	// Database
 	sql, err := sql.Open("postgres", cfg.DBConnection)
 	if err != nil {
-		e.Logger.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 	// Ping database if err log and exit
 	if err := sql.Ping(); err != nil {
-		e.Logger.Fatal(err)
+		logger.Fatal(err.Error())
 	}
 	defer sql.Close()
 
@@ -45,9 +50,9 @@ func main() {
 	// Start server
 	go func() {
 		if err := e.Start(fmt.Sprintf(":%d", cfg.Server.Port)); err != nil && err != http.ErrServerClosed {
-			e.Logger.Fatal("shutting down the server")
+			logger.Fatal("shutting down the server")
 		}
-		e.Logger.Info("gracefully shutdown the server")
+		logger.Info("gracefully shutdown the server")
 	}()
 
 	// Wait for interrupt signal to gracefully shutdown the server with a timeout of 10 seconds.
@@ -56,10 +61,11 @@ func main() {
 	signal.Notify(quit, os.Interrupt)
 	<-quit
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	gCtx := context.Background()
+	ctx, cancel := context.WithTimeout(gCtx, 10*time.Second)
 	defer cancel()
 
 	if err := e.Shutdown(ctx); err != nil {
-		e.Logger.Fatal(err)
+		logger.Fatal("unexpected shutdown the server", zap.Error(err))
 	}
 }
