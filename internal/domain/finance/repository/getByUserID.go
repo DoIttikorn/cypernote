@@ -8,7 +8,7 @@ import (
 	"github.com/lib/pq"
 )
 
-func (c *Config) GetByUserID(userId int64, types []string) ([]finance.M, error) {
+func (c *DB) GetByUserID(userId int64, types []string) ([]finance.M, error) {
 	var finances []finance.M
 	if len(types) == 0 {
 		types = []string{"income", "expense"}

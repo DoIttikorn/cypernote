@@ -6,7 +6,7 @@ import (
 	"github.com/Doittikorn/cypernote/internal/domain/finance"
 )
 
-type Config struct {
+type DB struct {
 	db *sql.DB
 }
 
@@ -15,12 +15,12 @@ type Config struct {
 // and can use function in R interface
 // R is interface for finance repository
 func New(db *sql.DB) finance.R {
-	return &Config{
+	return &DB{
 		db: db,
 	}
 }
-func (c *Config) Delete() {
+func (c *DB) Delete() {
 }
 
-func (c *Config) Update() {
+func (c *DB) Update() {
 }

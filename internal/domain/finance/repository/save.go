@@ -6,7 +6,7 @@ import (
 	"github.com/Doittikorn/cypernote/internal/domain/finance"
 )
 
-func (c *Config) Save(m *finance.M) error {
+func (c *DB) Save(m *finance.M) error {
 	query, err := c.db.Prepare(`
 		INSERT INTO finance (user_id, amount, note, type, status, datetime_at, created_at, updated_at) 
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
