@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"github.com/Doittikorn/cypernote/internal/tag"
+	"github.com/Doittikorn/cypernote/internal/domain/tag"
 )
 
 type usecase struct {

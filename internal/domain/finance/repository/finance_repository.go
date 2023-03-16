@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 
-	"github.com/Doittikorn/cypernote/internal/finance"
+	"github.com/Doittikorn/cypernote/internal/domain/finance"
 )
 
 type Config struct {

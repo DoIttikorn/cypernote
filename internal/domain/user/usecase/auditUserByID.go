@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/Doittikorn/cypernote/internal/user"
+import "github.com/Doittikorn/cypernote/internal/domain/user"
 
 func (u *Usecase) AuditUserByID(id user.UserID) error {
 

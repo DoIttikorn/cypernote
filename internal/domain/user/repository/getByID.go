@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/Doittikorn/cypernote/internal/user"
+	"github.com/Doittikorn/cypernote/internal/domain/user"
 )
 
 func (c *Config) GetByID(model *user.M) (user.M, error) {

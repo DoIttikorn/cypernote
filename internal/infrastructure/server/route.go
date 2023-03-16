@@ -4,11 +4,11 @@ import (
 	"database/sql"
 	"net/http"
 
-	_financeHttp "github.com/Doittikorn/cypernote/internal/finance/controller/https"
-	_financeRepository "github.com/Doittikorn/cypernote/internal/finance/repository"
-	_financeUsecase "github.com/Doittikorn/cypernote/internal/finance/usecase"
-	_userRepository "github.com/Doittikorn/cypernote/internal/user/repository"
-	_userUsecase "github.com/Doittikorn/cypernote/internal/user/usecase"
+	_financeHttp "github.com/Doittikorn/cypernote/internal/domain/finance/controller/https"
+	_financeRepository "github.com/Doittikorn/cypernote/internal/domain/finance/repository"
+	_financeUsecase "github.com/Doittikorn/cypernote/internal/domain/finance/usecase"
+	_userRepository "github.com/Doittikorn/cypernote/internal/domain/user/repository"
+	_userUsecase "github.com/Doittikorn/cypernote/internal/domain/user/usecase"
 	"github.com/labstack/echo/v4"
 )
 

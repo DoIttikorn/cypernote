@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 
-	"github.com/Doittikorn/cypernote/internal/tag"
+	"github.com/Doittikorn/cypernote/internal/domain/tag"
 )
 
 type Config struct {

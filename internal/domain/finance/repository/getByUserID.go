@@ -4,7 +4,7 @@ import (
 	"errors"
 	"log"
 
-	"github.com/Doittikorn/cypernote/internal/finance"
+	"github.com/Doittikorn/cypernote/internal/domain/finance"
 	"github.com/lib/pq"
 )
 

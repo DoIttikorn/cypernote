@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"github.com/Doittikorn/cypernote/internal/finance"
-	"github.com/Doittikorn/cypernote/internal/user"
+	"github.com/Doittikorn/cypernote/internal/domain/finance"
+	"github.com/Doittikorn/cypernote/internal/domain/user"
 	"github.com/Doittikorn/cypernote/pkg/errorc"
 )
 

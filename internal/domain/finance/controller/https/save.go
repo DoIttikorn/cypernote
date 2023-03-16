@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Doittikorn/cypernote/internal/finance"
+	"github.com/Doittikorn/cypernote/internal/domain/finance"
 	"github.com/Doittikorn/cypernote/pkg/errorc"
 	"github.com/labstack/echo/v4"
 )

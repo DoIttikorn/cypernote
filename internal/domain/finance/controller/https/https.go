@@ -1,7 +1,7 @@
 package https
 
 import (
-	"github.com/Doittikorn/cypernote/internal/finance"
+	"github.com/Doittikorn/cypernote/internal/domain/finance"
 	"github.com/labstack/echo/v4"
 )
 

@@ -3,7 +3,7 @@ package repository
 import (
 	"errors"
 
-	"github.com/Doittikorn/cypernote/internal/finance"
+	"github.com/Doittikorn/cypernote/internal/domain/finance"
 )
 
 func (c *Config) Save(m *finance.M) error {
