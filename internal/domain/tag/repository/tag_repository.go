@@ -6,31 +6,31 @@ import (
 	"github.com/Doittikorn/cypernote/internal/domain/tag"
 )
 
-type Config struct {
+type DB struct {
 	db *sql.DB
 }
 
 func New(db *sql.DB) tag.R {
-	return &Config{
+	return &DB{
 		db: db,
 	}
 }
 
-func (c *Config) GetAll() ([]tag.M, error) {
+func (c *DB) GetAll() ([]tag.M, error) {
 	return nil, nil
 }
-func (c *Config) GetByID(id tag.TagID) (tag.M, error) {
+func (c *DB) GetByID(id tag.TagID) (tag.M, error) {
 	return tag.M{ID: 2131234, Name: "te"}, nil
 }
-func (c *Config) GetByName(name tag.TagName) (tag.M, error) {
+func (c *DB) GetByName(name tag.TagName) (tag.M, error) {
 	return tag.M{ID: 2131234, Name: "te"}, nil
 }
-func (c *Config) Create(tag tag.M) error {
+func (c *DB) Create(tag tag.M) error {
 	return nil
 }
-func (c *Config) Update(tag tag.M) error {
+func (c *DB) Update(tag tag.M) error {
 	return nil
 }
-func (c *Config) Delete(id tag.TagID) error {
+func (c *DB) Delete(id tag.TagID) error {
 	return nil
 }
