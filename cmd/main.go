@@ -9,8 +9,8 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/Doittikorn/cypernote/internal/infrastructure/config"
-	"github.com/Doittikorn/cypernote/internal/infrastructure/server"
+	"github.com/Doittikorn/cypernote/internal/config"
+	"github.com/Doittikorn/cypernote/internal/route"
 	"github.com/Doittikorn/cypernote/pkg/mlog"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -44,7 +44,7 @@ func main() {
 	defer sql.Close()
 
 	// Routes
-	s := server.New(e, sql)
+	s := route.New(e, sql)
 	s.RouteV1()
 
 	// Start server
