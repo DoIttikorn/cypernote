@@ -24,7 +24,7 @@ func New(router *echo.Echo, database *sql.DB) *Server {
 	}
 }
 
-func (s *Server) Route() {
+func (s *Server) RouteV1() {
 
 	// Routes
 	v1 := s.echo.Group("/v1")
