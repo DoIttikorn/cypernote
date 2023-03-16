@@ -18,10 +18,3 @@ func New(financeRepo finance.R, userRepo user.U) finance.U {
 		userUsecase:       userRepo,
 	}
 }
-
-func (u *usecase) Update() {
-}
-
-func (u *usecase) Delete() {
-
-}
