@@ -4,7 +4,7 @@ import (
 	"github.com/Doittikorn/cypernote/internal/domain/user"
 )
 
-func (c *Config) GetByID(model *user.M) (user.M, error) {
+func (c *DB) GetByID(model *user.M) (user.M, error) {
 	// stmt, err := c.db.Prepare(`
 	// 	SELECT id
 	// 	FROM "user" u

@@ -6,12 +6,12 @@ import (
 	"github.com/Doittikorn/cypernote/internal/domain/user"
 )
 
-type Config struct {
+type DB struct {
 	db *sql.DB
 }
 
 func New(db *sql.DB) user.R {
-	return &Config{
+	return &DB{
 		db: db,
 	}
 }

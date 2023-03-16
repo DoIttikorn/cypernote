@@ -5,7 +5,7 @@ import (
 	"github.com/Doittikorn/cypernote/pkg/errorc"
 )
 
-func (c *Config) AuditUserByID(userId user.UserID) error {
+func (c *DB) AuditUserByID(userId user.UserID) error {
 	stmt, err := c.db.Prepare(`
 		SELECT id
 		FROM "user" u
