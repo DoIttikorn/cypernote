@@ -1,7 +1,7 @@
 package tag
 
 type (
-	// Model is a struct that represents a tag
+	// Model is a struct that Model a tag
 	M struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
