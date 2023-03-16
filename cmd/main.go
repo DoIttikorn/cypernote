@@ -46,6 +46,7 @@ func main() {
 	// Routes
 	s := route.New(e, sql)
 	s.RouteV1()
+	s.Health()
 
 	// Start server
 	go func() {

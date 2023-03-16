@@ -44,9 +44,10 @@ func (s *Server) RouteV1() {
 	// tagGroup := v1.Group("/tag")
 	// tagRepository := _tag.New(s.db)
 
-	// health check
-	v1.GET("/", hello)
+}
 
+func (s *Server) Health() {
+	s.echo.GET("/health", hello)
 }
 
 func hello(c echo.Context) error {
