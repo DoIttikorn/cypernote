@@ -5,7 +5,7 @@ import (
 )
 
 type (
-	// User is a struct that represents a user
+	// User is a struct that Model a user
 	M struct {
 		ID        int64     `json:"id"`
 		FirstName string    `json:"first_name"`
