@@ -1,4 +1,7 @@
 package repository
 
-func (c *DB) Update() {
+func (c *financeDB) Update() {
+}
+
+func (m *mock) Update() {
 }

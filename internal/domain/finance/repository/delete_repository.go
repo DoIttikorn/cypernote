@@ -1,4 +1,7 @@
 package repository
 
-func (c *DB) Delete() {
+func (c *financeDB) Delete() {
+}
+
+func (m *mock) Delete() {
 }

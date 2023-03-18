@@ -3,12 +3,13 @@ package repository
 import (
 	"errors"
 	"log"
+	"time"
 
 	"github.com/Doittikorn/cypernote/internal/domain/finance"
 	"github.com/lib/pq"
 )
 
-func (c *DB) GetByUserID(userId int64, types []string) ([]finance.M, error) {
+func (c *financeDB) GetByUserID(userId int64, types []string) ([]finance.M, error) {
 	var finances []finance.M
 	if len(types) == 0 {
 		types = []string{"income", "expense"}
@@ -43,4 +44,20 @@ func (c *DB) GetByUserID(userId int64, types []string) ([]finance.M, error) {
 	}
 
 	return finances, nil
+}
+
+func (m *mock) GetByUserID(userId int64, types []string) ([]finance.M, error) {
+	return []finance.M{
+		{
+			ID:         1,
+			UserID:     1,
+			Amount:     100,
+			Note:       "test",
+			Type:       "income",
+			Status:     "Y",
+			DateTimeAt: time.Now(),
+			CreatedAt:  time.Now(),
+			UpdatedAt:  time.Now(),
+		},
+	}, nil
 }
