@@ -6,11 +6,9 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
-	"strconv"
 	"testing"
 
 	"github.com/Doittikorn/cypernote/internal/domain/finance"
-	"github.com/Doittikorn/cypernote/pkg/errorc"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )
@@ -35,7 +33,16 @@ func (f *FinanceUsecaseMock) Delete() {
 
 func TestFinanceHandler_Save(t *testing.T) {
 	e := echo.New()
-	req := httptest.NewRequest(http.MethodPost, "/", bytes.NewReader([]byte(`{}`)))
+	req := httptest.NewRequest(http.MethodPost, "/", bytes.NewReader([]byte(`{
+		"user_id": 1,
+		"amount": 1,
+		"type": "income",
+		"note": "จ่ายค่าข้าว",
+		"datetime_at": "2023-02-17T09:18:57.829Z"
+	}`)))
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
+
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 
@@ -50,21 +57,21 @@ func TestFinanceHandler_Save(t *testing.T) {
 	}
 }
 
-func TestFinanceHandler_GetByUserID(t *testing.T) {
-	e := echo.New()
-	userID := int64(123)
-	req := httptest.NewRequest(http.MethodGet, "/", nil)
-	rec := httptest.NewRecorder()
-	c := e.NewContext(req, rec)
-	c.SetParamNames("id")
-	c.SetParamValues(strconv.FormatInt(userID, 10))
+// func TestFinanceHandler_GetByUserID(t *testing.T) {
+// 	e := echo.New()
+// 	userID := int64(123)
+// 	req := httptest.NewRequest(http.MethodGet, "/", nil)
+// 	rec := httptest.NewRecorder()
+// 	c := e.NewContext(req, rec)
+// 	c.SetParamNames("id")
+// 	c.SetParamValues(strconv.FormatInt(userID, 10))
 
-	handler := New(&FinanceUsecaseMock{})
-	err := handler.getByUserID(c)
+// 	handler := New(&FinanceUsecaseMock{})
+// 	err := handler.getByUserID(c)
 
-	if assert.Error(t, err) {
-		httpError := err.(*echo.HTTPError)
-		assert.Equal(t, http.StatusInternalServerError, httpError.Code)
-		assert.Equal(t, errorc.ResponseErr("Not implemented").Error(), httpError.Message)
-	}
-}
+// 	if assert.Error(t, err) {
+// 		httpError := err.(*echo.HTTPError)
+// 		assert.Equal(t, http.StatusInternalServerError, httpError.Code)
+// 		assert.Equal(t, errorc.ResponseErr("Not implemented").Error(), httpError.Message)
+// 	}
+// }

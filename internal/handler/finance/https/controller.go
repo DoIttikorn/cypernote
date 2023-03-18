@@ -35,7 +35,9 @@ func (h *FinanceHandler) Route(e *echo.Group) {
 func (h *FinanceHandler) save(c echo.Context) error {
 	var m finance.M
 	err := c.Bind(&m)
+	println("")
 	if err != nil {
+		println(err.Error())
 		return c.JSON(http.StatusBadRequest, errorc.ErrBind)
 	}
 
