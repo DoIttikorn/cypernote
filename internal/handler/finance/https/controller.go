@@ -12,16 +12,15 @@ import (
 
 type FinanceHandler struct {
 	usecase finance.U
-	filter  finance.Filter
 }
 
-func NewHttpHandler(e *echo.Group, usecase finance.U) {
-
-	h := &FinanceHandler{
+func New(usecase finance.U) *FinanceHandler {
+	return &FinanceHandler{
 		usecase: usecase,
-		filter:  finance.Filter{},
 	}
+}
 
+func (h *FinanceHandler) Route(e *echo.Group) {
 	e.POST("/", h.save)
 	e.DELETE("/", h.delete)
 	// e.POST("/", h.Update)
@@ -69,7 +68,7 @@ func (h *FinanceHandler) getByUserID(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, errorc.ErrInvalidID)
 	}
-	finance, err := h.usecase.GetByUserID(userID, filter)
+	finance, err := h.usecase.ExecuteGetByUserID(userID, filter)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
