@@ -15,7 +15,7 @@ type FinanceHandler struct {
 	filter  finance.Filter
 }
 
-func NewHttp(e *echo.Group, usecase finance.U) {
+func NewHttpHandler(e *echo.Group, usecase finance.U) {
 
 	h := &FinanceHandler{
 		usecase: usecase,

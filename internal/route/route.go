@@ -38,7 +38,8 @@ func (s *Server) RouteV1() {
 	financeGroup := v1.Group("/finance")
 	financeRepository := _financeRepository.New(s.db)
 	financeUsecase := _financeUsecase.New(financeRepository, userUsecase)
-	_financeHttp.NewHttp(financeGroup, financeUsecase)
+	// routes
+	_financeHttp.NewHttpHandler(financeGroup, financeUsecase)
 
 	// Tag group
 	// tagGroup := v1.Group("/tag")
