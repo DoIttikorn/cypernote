@@ -10,8 +10,8 @@ type DB struct {
 	db *sql.DB
 }
 
-func New(db *sql.DB) user.R {
+func New(store *sql.DB) user.R {
 	return &DB{
-		db: db,
+		db: store,
 	}
 }

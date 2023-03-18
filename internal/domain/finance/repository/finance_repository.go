@@ -14,8 +14,8 @@ type DB struct {
 // database connection
 // and can use function in R interface
 // R is interface for finance repository
-func New(db *sql.DB) finance.R {
+func New(store *sql.DB) finance.R {
 	return &DB{
-		db: db,
+		db: store,
 	}
 }

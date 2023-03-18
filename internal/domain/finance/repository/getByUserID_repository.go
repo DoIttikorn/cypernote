@@ -19,6 +19,7 @@ func (c *DB) GetByUserID(userId int64, types []string) ([]finance.M, error) {
 		FROM finance
 		WHERE user_id = $1 AND type = ANY ($2)
 	`)
+
 	if err != nil {
 		log.Println(err)
 		return finances, errors.New("prepare query error")
