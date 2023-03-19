@@ -1,4 +1,4 @@
-package repository
+package financeRepository
 
 import (
 	"errors"

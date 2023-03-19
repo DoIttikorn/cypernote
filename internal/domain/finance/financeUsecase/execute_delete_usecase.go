@@ -1,4 +1,4 @@
-package usecase
+package financeUsecase
 
 func (u *financeUsecase) ExecuteDelete() {
 }

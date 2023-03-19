@@ -1,4 +1,4 @@
-package usecase
+package financeUsecase
 
 import (
 	"github.com/Doittikorn/cypernote/internal/domain/finance"

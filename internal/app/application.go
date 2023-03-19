@@ -4,11 +4,11 @@ import (
 	"database/sql"
 
 	"github.com/Doittikorn/cypernote/internal/domain/finance"
+	"github.com/Doittikorn/cypernote/internal/domain/finance/financeRepository"
+	"github.com/Doittikorn/cypernote/internal/domain/finance/financeUsecase"
 	_financeHandler "github.com/Doittikorn/cypernote/internal/domain/finance/handler"
-	_financeRepository "github.com/Doittikorn/cypernote/internal/domain/finance/repository"
-	_financeUsecase "github.com/Doittikorn/cypernote/internal/domain/finance/usecase"
-	_userRepository "github.com/Doittikorn/cypernote/internal/domain/user/userRepository"
-	_userUsecase "github.com/Doittikorn/cypernote/internal/domain/user/userUsecase"
+	"github.com/Doittikorn/cypernote/internal/domain/user/userRepository"
+	"github.com/Doittikorn/cypernote/internal/domain/user/userUsecase"
 )
 
 type app struct {
@@ -23,9 +23,9 @@ func InitializeApp(db *sql.DB) app {
 	return app{
 		Handler: handler{
 			Finance: _financeHandler.New(
-				_financeUsecase.New(
-					_financeRepository.New(db),
-					_userUsecase.New(_userRepository.New(db)),
+				financeUsecase.New(
+					financeRepository.New(db),
+					userUsecase.New(userRepository.New(db)),
 				),
 			),
 		},
