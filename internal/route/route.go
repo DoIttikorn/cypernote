@@ -36,7 +36,7 @@ func (s *Server) RouteV1() {
 
 	//* Finance group
 	financeGroup := v1.Group("/finance")
-	financeRepository := _financeRepository.NewMock()
+	financeRepository := _financeRepository.New(s.db)
 	financeUsecase := _financeUsecase.New(financeRepository, userUsecase)
 	_financeHttp.New(financeUsecase).Route(financeGroup)
 	// route

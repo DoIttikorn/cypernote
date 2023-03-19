@@ -26,7 +26,7 @@ type financeRepositoryMock struct {
 	finance []*finance.M
 }
 
-func NewMock() *financeRepositoryMock {
+func NewMock() finance.R {
 	return &financeRepositoryMock{
 		finance: make([]*finance.M, 0),
 	}
