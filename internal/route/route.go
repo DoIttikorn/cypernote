@@ -12,19 +12,19 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type Server struct {
+type server struct {
 	echo *echo.Echo
 	db   *sql.DB
 }
 
-func New(router *echo.Echo, database *sql.DB) *Server {
-	return &Server{
+func New(router *echo.Echo, database *sql.DB) *server {
+	return &server{
 		echo: router,
 		db:   database,
 	}
 }
 
-func (s *Server) RouteV1() {
+func (s *server) RouteV1() {
 
 	// Routes
 	v1 := s.echo.Group("/v1")
@@ -48,7 +48,7 @@ func (s *Server) RouteV1() {
 
 }
 
-func (s *Server) Health() {
+func (s *server) Health() {
 	s.echo.GET("/health", hello)
 }
 
