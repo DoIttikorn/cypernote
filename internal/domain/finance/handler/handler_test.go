@@ -47,7 +47,7 @@ func TestFinanceHandler_Save(t *testing.T) {
 	c := e.NewContext(req, rec)
 
 	handler := New(&FinanceUsecaseMock{})
-	err := handler.save(c)
+	err := handler.Save(c)
 
 	if assert.NoError(t, err) {
 		assert.Equal(t, http.StatusCreated, rec.Code)

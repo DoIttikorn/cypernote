@@ -14,7 +14,7 @@ type financeUsecase struct {
 
 // initialize usecase for finance when call New Usecase can use
 // finance repository and user repository
-func New(financeRepo finance.R, userUsecase user.U) *financeUsecase {
+func New(financeRepo finance.R, userUsecase user.U) finance.U {
 	return &financeUsecase{
 		financeRepository: financeRepo,
 		userUsecase:       userUsecase,

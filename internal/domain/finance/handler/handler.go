@@ -20,20 +20,7 @@ func New(finance finance.U) *financeHandler {
 	}
 }
 
-func (h *financeHandler) Route(e *echo.Group) {
-	// start endpoint
-	// v1/finance
-	e.POST("/", h.save)
-	e.DELETE("/", h.delete)
-	// e.POST("/", h.Update)
-
-	// user group for finance
-	userFinance := e.Group("/user/:id")
-
-	userFinance.GET("", h.getByUserID)
-}
-
-func (h *financeHandler) save(c echo.Context) error {
+func (h *financeHandler) Save(c echo.Context) error {
 	var m finance.M
 	err := c.Bind(&m)
 	if err != nil {
@@ -52,7 +39,7 @@ func (h *financeHandler) save(c echo.Context) error {
 	return c.JSON(http.StatusCreated, m)
 }
 
-func (h *financeHandler) getByUserID(c echo.Context) error {
+func (h *financeHandler) GetByUserID(c echo.Context) error {
 	id := c.Param("id")
 	var filter = new(finance.Filter)
 
@@ -79,6 +66,6 @@ func (h *financeHandler) getByUserID(c echo.Context) error {
 	return nil
 }
 
-func (h *financeHandler) delete(e echo.Context) error {
+func (h *financeHandler) Delete(e echo.Context) error {
 	return nil
 }
