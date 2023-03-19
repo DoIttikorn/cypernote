@@ -46,7 +46,7 @@ func (h *FinanceHandler) save(c echo.Context) error {
 	m.CreatedAt = currentTime
 	m.UpdatedAt = currentTime
 
-	err = h.usecase.Save(&m)
+	err = h.usecase.ExecuteSave(&m)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
 	}

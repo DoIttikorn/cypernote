@@ -5,7 +5,7 @@ import (
 	"github.com/Doittikorn/cypernote/internal/domain/user"
 )
 
-func (u *financeUsecase) Save(model *finance.M) error {
+func (u *financeUsecase) ExecuteSave(model *finance.M) error {
 
 	// check user id is exist
 	var auditUserId user.UserID = model.UserID

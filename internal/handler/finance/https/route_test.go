@@ -16,7 +16,7 @@ import (
 type FinanceUsecaseMock struct {
 }
 
-func (f *FinanceUsecaseMock) Save(m *finance.M) error {
+func (f *FinanceUsecaseMock) ExecuteSave(m *finance.M) error {
 	return nil
 }
 

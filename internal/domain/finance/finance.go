@@ -35,7 +35,7 @@ type (
 	// usecase interface for finance
 	U interface {
 		ExecuteGetByUserID(userID int64, filter *Filter) ([]M, error)
-		Save(model *M) error
+		ExecuteSave(model *M) error
 		Update()
 		Delete()
 	}
