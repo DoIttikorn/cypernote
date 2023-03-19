@@ -36,8 +36,8 @@ type (
 	U interface {
 		ExecuteGetByUserID(userID int64, filter *Filter) ([]M, error)
 		ExecuteSave(model *M) error
-		Update()
-		Delete()
+		ExecuteUpdate()
+		ExecuteDelete()
 	}
 
 	// handler https interface for finance

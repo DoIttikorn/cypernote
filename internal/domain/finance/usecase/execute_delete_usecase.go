@@ -1,4 +1,4 @@
 package usecase
 
-func (u *financeUsecase) Update() {
+func (u *financeUsecase) ExecuteDelete() {
 }

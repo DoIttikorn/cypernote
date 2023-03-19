@@ -24,10 +24,10 @@ func (f *FinanceUsecaseMock) ExecuteGetByUserID(userID int64, filter *finance.Fi
 	return nil, errors.New("Not implemented")
 }
 
-func (f *FinanceUsecaseMock) Update() {
+func (f *FinanceUsecaseMock) ExecuteUpdate() {
 
 }
-func (f *FinanceUsecaseMock) Delete() {
+func (f *FinanceUsecaseMock) ExecuteDelete() {
 
 }
 
