@@ -4,11 +4,11 @@ import (
 	"database/sql"
 	"net/http"
 
+	_financeHandler "github.com/Doittikorn/cypernote/internal/domain/finance/handler"
 	_financeRepository "github.com/Doittikorn/cypernote/internal/domain/finance/repository"
 	_financeUsecase "github.com/Doittikorn/cypernote/internal/domain/finance/usecase"
 	_userRepository "github.com/Doittikorn/cypernote/internal/domain/user/repository"
 	_userUsecase "github.com/Doittikorn/cypernote/internal/domain/user/usecase"
-	_financeHttp "github.com/Doittikorn/cypernote/internal/handler/finance/https"
 	"github.com/labstack/echo/v4"
 )
 
@@ -38,7 +38,8 @@ func (s *Server) RouteV1() {
 	financeGroup := v1.Group("/finance")
 	financeRepository := _financeRepository.New(s.db)
 	financeUsecase := _financeUsecase.New(financeRepository, userUsecase)
-	_financeHttp.New(financeUsecase).Route(financeGroup)
+	financeHandler := _financeHandler.New(financeUsecase)
+	financeHandler.Route(financeGroup)
 	// route
 
 	// Tag group

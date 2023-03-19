@@ -1,4 +1,4 @@
-package https
+package handler
 
 import (
 	"net/http"
@@ -10,17 +10,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type FinanceHandler struct {
+type financeHandler struct {
 	usecase finance.U
 }
 
-func New(usecase finance.U) *FinanceHandler {
-	return &FinanceHandler{
-		usecase: usecase,
+func New(finance finance.U) *financeHandler {
+	return &financeHandler{
+		usecase: finance,
 	}
 }
 
-func (h *FinanceHandler) Route(e *echo.Group) {
+func (h *financeHandler) Route(e *echo.Group) {
 	// start endpoint
 	// v1/finance
 	e.POST("/", h.save)
@@ -31,10 +31,9 @@ func (h *FinanceHandler) Route(e *echo.Group) {
 	userFinance := e.Group("/user/:id")
 
 	userFinance.GET("", h.getByUserID)
-
 }
 
-func (h *FinanceHandler) save(c echo.Context) error {
+func (h *financeHandler) save(c echo.Context) error {
 	var m finance.M
 	err := c.Bind(&m)
 	if err != nil {
@@ -53,7 +52,7 @@ func (h *FinanceHandler) save(c echo.Context) error {
 	return c.JSON(http.StatusCreated, m)
 }
 
-func (h *FinanceHandler) getByUserID(c echo.Context) error {
+func (h *financeHandler) getByUserID(c echo.Context) error {
 	id := c.Param("id")
 	var filter = new(finance.Filter)
 
@@ -80,6 +79,6 @@ func (h *FinanceHandler) getByUserID(c echo.Context) error {
 	return nil
 }
 
-func (h *FinanceHandler) delete(e echo.Context) error {
+func (h *financeHandler) delete(e echo.Context) error {
 	return nil
 }
