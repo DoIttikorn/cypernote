@@ -9,7 +9,7 @@ import (
 	"github.com/lib/pq"
 )
 
-func (c *financeDB) GetByUserID(userId int64, types []string) ([]finance.M, error) {
+func (c *financeRepositoryDB) GetByUserID(userId int64, types []string) ([]finance.M, error) {
 	var finances []finance.M
 	if len(types) == 0 {
 		types = []string{"income", "expense"}
@@ -46,7 +46,7 @@ func (c *financeDB) GetByUserID(userId int64, types []string) ([]finance.M, erro
 	return finances, nil
 }
 
-func (m *mock) GetByUserID(userId int64, types []string) ([]finance.M, error) {
+func (m *financeRepositoryMock) GetByUserID(userId int64, types []string) ([]finance.M, error) {
 	return []finance.M{
 		{
 			ID:         1,

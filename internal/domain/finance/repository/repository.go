@@ -7,7 +7,7 @@ import (
 )
 
 // don't another package can access this struct
-type financeDB struct {
+type financeRepositoryDB struct {
 	db *sql.DB
 }
 
@@ -15,19 +15,19 @@ type financeDB struct {
 // database connection
 // and can use function in R interface
 // R is interface for finance repository
-func New(store *sql.DB) *financeDB {
-	return &financeDB{
+func New(store *sql.DB) *financeRepositoryDB {
+	return &financeRepositoryDB{
 		db: store,
 	}
 }
 
-// mock is mock for finance repository
-type mock struct {
+// financeRepositoryMock is financeRepositoryMock for finance repository
+type financeRepositoryMock struct {
 	finance []*finance.M
 }
 
-func NewMock() *mock {
-	return &mock{
+func NewMock() *financeRepositoryMock {
+	return &financeRepositoryMock{
 		finance: make([]*finance.M, 0),
 	}
 }
