@@ -39,6 +39,7 @@ type (
 	}
 )
 
+// about usecase
 type (
 	FinanceRequest struct {
 		UserID     int64     `json:"user_id"`

@@ -1,4 +1,4 @@
-package usecase
+package tagUsecase
 
 import (
 	"github.com/Doittikorn/cypernote/internal/domain/tag"

@@ -1,4 +1,4 @@
-package usecase
+package userUsecase
 
 import (
 	"github.com/Doittikorn/cypernote/internal/domain/user"

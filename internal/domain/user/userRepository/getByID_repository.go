@@ -1,4 +1,4 @@
-package repository
+package userRepository
 
 import (
 	"github.com/Doittikorn/cypernote/internal/domain/user"

@@ -7,8 +7,8 @@ import (
 	_financeHandler "github.com/Doittikorn/cypernote/internal/domain/finance/handler"
 	_financeRepository "github.com/Doittikorn/cypernote/internal/domain/finance/repository"
 	_financeUsecase "github.com/Doittikorn/cypernote/internal/domain/finance/usecase"
-	_userRepository "github.com/Doittikorn/cypernote/internal/domain/user/repository"
-	_userUsecase "github.com/Doittikorn/cypernote/internal/domain/user/usecase"
+	_userRepository "github.com/Doittikorn/cypernote/internal/domain/user/userRepository"
+	_userUsecase "github.com/Doittikorn/cypernote/internal/domain/user/userUsecase"
 	"github.com/labstack/echo/v4"
 )
 
