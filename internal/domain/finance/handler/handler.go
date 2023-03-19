@@ -13,7 +13,7 @@ type financeHandler struct {
 	usecase finance.U
 }
 
-func New(finance finance.U) *financeHandler {
+func New(finance finance.U) finance.H {
 	return &financeHandler{
 		usecase: finance,
 	}
