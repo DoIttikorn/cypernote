@@ -23,3 +23,7 @@ func ResponseErr(message string) error {
 func (e *Error) Error() string {
 	return e.Message
 }
+
+func (e *Error) StatusCode() int {
+	return e.Status
+}

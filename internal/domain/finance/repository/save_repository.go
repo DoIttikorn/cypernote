@@ -12,7 +12,6 @@ func (c *financeRepositoryDB) Save(m *finance.M) error {
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 		RETURNING id
 	`)
-	println(query)
 	if err != nil {
 		return errors.New("prepare query error")
 	}

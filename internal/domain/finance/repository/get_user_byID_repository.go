@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"log"
 	"time"
 
 	"github.com/Doittikorn/cypernote/internal/domain/finance"
@@ -22,12 +21,10 @@ func (c *financeRepositoryDB) GetByUserID(userId int64, types []string) ([]finan
 	`)
 
 	if err != nil {
-		log.Println(err)
 		return finances, errors.New("prepare query error")
 	}
 	rows, err := query.Query(userId, pq.Array(types))
 	if err != nil {
-		log.Println(err)
 		return finances, errors.New("query error")
 	}
 
@@ -37,7 +34,6 @@ func (c *financeRepositoryDB) GetByUserID(userId int64, types []string) ([]finan
 		var finance finance.M
 		err = rows.Scan(&finance.ID, &finance.UserID, &finance.Amount, &finance.Note, &finance.Type, &finance.Status, &finance.DateTimeAt, &finance.CreatedAt, &finance.UpdatedAt)
 		if err != nil {
-			log.Println(err)
 			return finances, errors.New("scan error")
 		}
 		finances = append(finances, finance)
