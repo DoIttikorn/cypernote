@@ -19,8 +19,8 @@ type handler struct {
 	Finance finance.H
 }
 
-func InitializeApp(db *sql.DB) app {
-	return app{
+func InitializeApp(db *sql.DB) *app {
+	return &app{
 		Handler: handler{
 			Finance: _financeHandler.New(
 				financeUsecase.New(

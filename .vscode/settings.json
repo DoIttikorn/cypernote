@@ -5,6 +5,7 @@
         "Doittikorn",
         "errorc",
         "labstack",
+        "mlog",
         "Usecase"
     ]
 }
