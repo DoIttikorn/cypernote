@@ -6,11 +6,11 @@ import (
 	"github.com/Doittikorn/cypernote/pkg/errorc"
 )
 
-func (u *financeUsecase) ExecuteGetByUserID(userId int64, filter *finance.Filter) ([]finance.M, error) {
+func (u *financeUsecase) ExecuteGetByUserID(userId int64, filter *finance.Filter) ([]finance.FinanceResponse, error) {
 	// check user id is exist
 	var auditUserId user.UserID = userId
 	err := u.userUsecase.AuditUserByID(auditUserId)
-	var finance = []finance.M{}
+	var finance = []finance.FinanceResponse{}
 	if err != nil {
 		return finance, err
 	}

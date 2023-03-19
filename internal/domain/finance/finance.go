@@ -21,7 +21,7 @@ type (
 	}
 	// repository interface for finance
 	R interface {
-		GetByUserID(userId int64, types []string) ([]M, error)
+		GetByUserID(userId int64, types []string) ([]FinanceResponse, error)
 		Save(model *M) error
 		Update()
 		Delete()
@@ -58,7 +58,7 @@ type (
 	}
 	// usecase interface for finance
 	U interface {
-		ExecuteGetByUserID(userID int64, filter *Filter) ([]M, error)
+		ExecuteGetByUserID(userID int64, filter *Filter) ([]FinanceResponse, error)
 		ExecuteSave(model *FinanceRequest) (*FinanceResponse, error)
 		ExecuteUpdate()
 		ExecuteDelete()

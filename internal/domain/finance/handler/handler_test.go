@@ -28,7 +28,7 @@ func (f *FinanceUsecaseMock) ExecuteSave(m *finance.FinanceRequest) (*finance.Fi
 	}, nil
 }
 
-func (f *FinanceUsecaseMock) ExecuteGetByUserID(userID int64, filter *finance.Filter) ([]finance.M, error) {
+func (f *FinanceUsecaseMock) ExecuteGetByUserID(userID int64, filter *finance.Filter) ([]finance.FinanceResponse, error) {
 	return nil, errors.New("Not implemented")
 }
 
@@ -65,21 +65,25 @@ func TestFinanceHandler_Save(t *testing.T) {
 	}
 }
 
-// func TestFinanceHandler_GetByUserID(t *testing.T) {
-// 	e := echo.New()
-// 	userID := int64(123)
-// 	req := httptest.NewRequest(http.MethodGet, "/", nil)
-// 	rec := httptest.NewRecorder()
-// 	c := e.NewContext(req, rec)
-// 	c.SetParamNames("id")
-// 	c.SetParamValues(strconv.FormatInt(userID, 10))
+func TestFinanceHandler_GetByUserID(t *testing.T) {
 
-// 	handler := New(&FinanceUsecaseMock{})
-// 	err := handler.getByUserID(c)
+	e := echo.New()
+	req := httptest.NewRequest(http.MethodGet, "/", nil)
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
 
-// 	if assert.Error(t, err) {
-// 		httpError := err.(*echo.HTTPError)
-// 		assert.Equal(t, http.StatusInternalServerError, httpError.Code)
-// 		assert.Equal(t, errorc.ResponseErr("Not implemented").Error(), httpError.Message)
-// 	}
-// }
+	rec := httptest.NewRecorder()
+	c := e.NewContext(req, rec)
+
+	handler := New(&FinanceUsecaseMock{})
+	err := handler.GetByUserID(c)
+
+	if assert.NoError(t, err) {
+		assert.Equal(t, http.StatusOK, rec.Code)
+
+		var m []finance.M
+		json.Unmarshal(rec.Body.Bytes(), &m)
+		assert.Equal(t, 1, len(m))
+
+	}
+}

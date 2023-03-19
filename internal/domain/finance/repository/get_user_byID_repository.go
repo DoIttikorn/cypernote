@@ -8,14 +8,14 @@ import (
 	"github.com/lib/pq"
 )
 
-func (c *financeRepositoryDB) GetByUserID(userId int64, types []string) ([]finance.M, error) {
-	var finances []finance.M
+func (c *financeRepositoryDB) GetByUserID(userId int64, types []string) ([]finance.FinanceResponse, error) {
+	var finances []finance.FinanceResponse
 	if len(types) == 0 {
 		types = []string{"income", "expense"}
 	}
 
 	query, err := c.db.Prepare(`
-		SELECT id, user_id, amount, note, type, status, datetime_at, created_at, updated_at
+		SELECT id, amount, note, type, status, datetime_at
 		FROM finance
 		WHERE user_id = $1 AND type = ANY ($2)
 	`)
@@ -31,10 +31,10 @@ func (c *financeRepositoryDB) GetByUserID(userId int64, types []string) ([]finan
 	defer rows.Close()
 
 	for rows.Next() {
-		var finance finance.M
-		err = rows.Scan(&finance.ID, &finance.UserID, &finance.Amount, &finance.Note, &finance.Type, &finance.Status, &finance.DateTimeAt, &finance.CreatedAt, &finance.UpdatedAt)
+		var finance finance.FinanceResponse
+		err = rows.Scan(&finance.ID, &finance.Amount, &finance.Note, &finance.Type, &finance.Status, &finance.DateTimeAt)
 		if err != nil {
-			return finances, errors.New("scan error")
+			return finances, errors.New("error result data")
 		}
 		finances = append(finances, finance)
 	}
@@ -42,18 +42,15 @@ func (c *financeRepositoryDB) GetByUserID(userId int64, types []string) ([]finan
 	return finances, nil
 }
 
-func (m *financeRepositoryMock) GetByUserID(userId int64, types []string) ([]finance.M, error) {
-	return []finance.M{
+func (m *financeRepositoryMock) GetByUserID(userId int64, types []string) ([]finance.FinanceResponse, error) {
+	return []finance.FinanceResponse{
 		{
 			ID:         1,
-			UserID:     1,
 			Amount:     100,
 			Note:       "test",
 			Type:       "income",
 			Status:     "Y",
 			DateTimeAt: time.Now(),
-			CreatedAt:  time.Now(),
-			UpdatedAt:  time.Now(),
 		},
 	}, nil
 }
