@@ -3,7 +3,6 @@ package handler
 import (
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/Doittikorn/cypernote/internal/domain/finance"
 	"github.com/Doittikorn/cypernote/pkg/errorc"
@@ -21,22 +20,19 @@ func New(finance finance.U) *financeHandler {
 }
 
 func (h *financeHandler) Save(c echo.Context) error {
-	var m finance.M
+	var m finance.FinanceRequest
 	err := c.Bind(&m)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, errorc.ErrBind)
 	}
 
 	m.Status = "Y"
-	currentTime := time.Now()
-	m.CreatedAt = currentTime
-	m.UpdatedAt = currentTime
 
-	err = h.usecase.ExecuteSave(&m)
+	finance, err := h.usecase.ExecuteSave(&m)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
 	}
-	return c.JSON(http.StatusCreated, m)
+	return c.JSON(http.StatusCreated, finance)
 }
 
 func (h *financeHandler) GetByUserID(c echo.Context) error {

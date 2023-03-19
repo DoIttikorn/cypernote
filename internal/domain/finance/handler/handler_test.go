@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/Doittikorn/cypernote/internal/domain/finance"
 	"github.com/labstack/echo/v4"
@@ -16,8 +17,15 @@ import (
 type FinanceUsecaseMock struct {
 }
 
-func (f *FinanceUsecaseMock) ExecuteSave(m *finance.M) error {
-	return nil
+func (f *FinanceUsecaseMock) ExecuteSave(m *finance.FinanceRequest) (*finance.FinanceResponse, error) {
+	return &finance.FinanceResponse{
+		ID:         1,
+		Amount:     1,
+		Type:       "income",
+		Note:       "จ่ายค่าข้าว",
+		DateTimeAt: time.Now(),
+		Status:     "Y",
+	}, nil
 }
 
 func (f *FinanceUsecaseMock) ExecuteGetByUserID(userID int64, filter *finance.Filter) ([]finance.M, error) {
