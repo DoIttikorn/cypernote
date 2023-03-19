@@ -6,6 +6,7 @@ import (
 )
 
 // don't another package can access this struct
+// and property can't access from another package
 type financeUsecase struct {
 	financeRepository finance.R
 	userUsecase       user.U
