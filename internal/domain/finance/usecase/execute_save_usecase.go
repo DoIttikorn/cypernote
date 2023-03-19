@@ -15,10 +15,12 @@ func (u *financeUsecase) ExecuteSave(request *finance.FinanceRequest) (*finance.
 	}
 
 	model := finance.M{
-		UserID: request.UserID,
-		Type:   request.Type,
-		Amount: request.Amount,
-		Status: "Y",
+		UserID:     request.UserID,
+		Type:       request.Type,
+		Amount:     request.Amount,
+		Note:       request.Note,
+		Status:     "Y",
+		DateTimeAt: request.DateTimeAt,
 	}
 
 	err = u.financeRepository.Save(&model)

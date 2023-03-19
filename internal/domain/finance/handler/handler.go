@@ -23,12 +23,12 @@ func (h *financeHandler) Save(c echo.Context) error {
 	var m finance.FinanceRequest
 	err := c.Bind(&m)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, errorc.ErrBind)
+		return echo.NewHTTPError(http.StatusBadRequest, errorc.ErrBind)
 	}
 
 	finance, err := h.usecase.ExecuteSave(&m)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
+		return echo.NewHTTPError(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
 	}
 	return c.JSON(http.StatusCreated, finance)
 }
@@ -42,18 +42,18 @@ func (h *financeHandler) GetByUserID(c echo.Context) error {
 	}
 
 	if id == "" {
-		return c.JSON(http.StatusNotFound, errorc.ErrNotFound)
+		return echo.NewHTTPError(http.StatusNotFound, errorc.ErrNotFound)
 	}
 
 	userID, err := strconv.ParseInt(id, 10, 64)
 
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, errorc.ErrInvalidID)
+		return echo.NewHTTPError(http.StatusBadRequest, errorc.ErrInvalidID)
 	}
 	finance, err := h.usecase.ExecuteGetByUserID(userID, filter)
 
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
+		return echo.NewHTTPError(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))
 	}
 
 	c.JSON(http.StatusOK, finance)
