@@ -24,6 +24,15 @@ var (
 	database *sql.DB
 )
 
+// TODO
+// 1. add unit test
+// 2. add integration test
+// 3. add timeout for request
+// 4. add logger
+// 5. add middleware
+// 6. add swagger
+// 7. add vault env
+
 func main() {
 	// Initialize Config
 	cfg := config.New().All()
@@ -43,17 +52,11 @@ func main() {
 	defer database.Close()
 
 	// API
-	// Echo instance
 	e := echo.New()
 
 	// Middleware
 	e.Use(mlog.Middleware(logger))
 	e.Use(middleware.Recover())
-
-	// Routes
-	// s := route.New(e, sql)
-	// s.RouteV1()
-	// s.Health()
 
 	// Instance App
 	app := app.InitializeApp(database)
@@ -82,3 +85,8 @@ func main() {
 		logger.Fatal("unexpected shutdown the server", zap.Error(err))
 	}
 }
+
+// Routes
+// s := route.New(e, sql)
+// s.RouteV1()
+// s.Health()
