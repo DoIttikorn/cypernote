@@ -26,8 +26,6 @@ func (h *financeHandler) Save(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, errorc.ErrBind)
 	}
 
-	m.Status = "Y"
-
 	finance, err := h.usecase.ExecuteSave(&m)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, errorc.ResponseErr(err.Error()))

@@ -45,7 +45,6 @@ type (
 		Amount     float32   `json:"amount"`
 		Note       string    `json:"note"`
 		Type       string    `json:"type"`
-		Status     string    `json:"status" default:"Y"`
 		DateTimeAt time.Time `json:"datetime_at"`
 	}
 

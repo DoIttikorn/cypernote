@@ -18,7 +18,7 @@ func (u *financeUsecase) ExecuteSave(request *finance.FinanceRequest) (*finance.
 		UserID: request.UserID,
 		Type:   request.Type,
 		Amount: request.Amount,
-		Status: request.Status,
+		Status: "Y",
 	}
 
 	err = u.financeRepository.Save(&model)
